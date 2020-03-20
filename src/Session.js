@@ -8,7 +8,6 @@ const session = {
 	counter: null,
 	message: null,
 	error: null,
-	formatID: (id) => 'SE20'+(id+'').padStart(5, '0'),
 	reload: () => session.setCounter(Math.random()),
 	setMessage(v) {
 		session.message = v;

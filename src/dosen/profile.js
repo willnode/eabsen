@@ -36,7 +36,7 @@ export default function () {
 				data ? (<form onSubmit={submit}>
 					{controlInput({name: 'username', label: 'Username', value: form.username, required: true, minLength: 3})}
 					{controlInput({name: 'nama', label: 'Nama', value: form.nama, required: true, minLength: 3})}
-					{controlInput({name: 'nim', label: 'NIM', value: form.nim, required: true})}
+					{controlInput({name: 'nip', label: 'NIP', value: form.nip, required: true})}
 					{controlImage({name: 'avatar', label: 'Avatar', value: form.avatar, folder: 'avatar'})}
 					{controlOption({name: 'jenis_kelamin', label: 'Jenis Kelamin', value: form.jenis_kelamin, required: true, options: [
 						{key: 'L', value: 'Laki-Laki'},

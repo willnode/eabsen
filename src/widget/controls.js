@@ -258,10 +258,9 @@ function controlTable(data, columns) {
 	data.ajaxOptions = 'ajaxLogin'
 	window.ajaxLogin = ({
 		beforeSend: function (xhr) {
-			xhr.setRequestHeader('Authentication', session.auth);
+			xhr.setRequestHeader('Authorization', session.auth);
 		}
 	})
-	data.url || (data.url = path.join (window.location.pathname.replace('/web/'+session.login.role+'/', ''), '/get'));
 	data.url = session.baseUrlByRole(data.url)
 	data.search || (data.search = 'true');
 	data.toggle || (data.toggle = 'table');
