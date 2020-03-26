@@ -12,10 +12,16 @@ export default function ({ id }) {
 		{controlTable({
 			url: `absen/${id}`,
 			toolbar: controlButtons([{
-				href: 'create',
-				title: 'New',
+				href: `/dosen/pertemuan/barcode/${id}`,
+				title: 'Barcode',
 				icon: 'fa fa-plus',
-				style: 'btn btn-success ml-2',
+				style: 'btn btn-primary ml-2',
+			}, {
+				href: () => session.history.goBack(),
+				title: 'Kembali',
+				key: 'back',
+				icon: 'fa fa-chevron-left',
+				style: 'btn btn-secondary',
 			}])
 		}, [{
 			field: 'avatar',

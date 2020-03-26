@@ -1,6 +1,40 @@
 
 
 const serverUrl = process.env.NODE_ENV === 'production' ? 'https://dev.wellosoft.net/eabsen' : 'http://localhost/eabsen-ci';
+
+const serverHandler = async (url,method,body) => {
+	let response;
+	try {
+		if (body && !(body instanceof FormData)) {
+			if (body instanceof Event) {
+				body = session.extract(body);
+			} else {
+				var data = new FormData();
+				Object.entries(body).forEach(([k,v])=>data.append(k, v));
+				body = data;
+			}
+		}
+		const result = await fetch(url, {
+			headers: {
+				...(session.auth ? { 'Authorization': session.auth, 'Accept': 'application/json' } : {})
+			},
+			method,
+			body,
+		});
+		response = await result.json();
+	} catch (error) {
+		session.error = error;
+		throw session.error;
+	} finally {
+		if (response.status !== 'Error') {
+			return response;
+		} else {
+			session.error = response.message;
+			throw session.error;
+		}
+	}
+}
+
 const session = {
 	auth: null,
 	login: null,
@@ -18,60 +52,19 @@ const session = {
 		session.reload();
 	},
 	baseUrl: url => `${serverUrl}/${url}`,
-	baseUrlByRole: url => `${serverUrl}/${session.login.role}/${url}`,
+	baseUrlByRole: url => session.login ? `${serverUrl}/${session.login.role}/${url}` : session.baseUrl(url),
 	extract(event) {
 		event.preventDefault();
 		return new FormData(event.target);
 	},
-	get: async function (url) {
-		let response;
-		try {
-			const result = await fetch(`${serverUrl}/${url}`, {
-				headers: {
-					...(session.auth ? { 'Authorization': session.auth, 'Accept': 'application/json' } : {})
-				}
-			});
-			response = await result.json();
-		} catch (error) {
-			session.error = error;
-			throw session.error;
-		} finally {
-			if (response.status !== 'Error') {
-				return response;
-			} else {
-				session.error = response.message;
-				throw session.error;
-			}
-		}
-	},
-	post: async function (url, form) {
-		if (!(form instanceof FormData)) {
-			var data = new FormData();
-			Object.entries(form).forEach(([k,v])=>data.append(k, v));
-			form = data;
-		}
-		const result = await fetch(`${serverUrl}/${url}`, {
-			headers: {
-				...(session.auth ? { 'Authorization': session.auth, 'Accept': 'application/json' } : {}),
-			},
-			body: form,
-			method: 'post'
-		});
-		const response = await result.json();
-		if (response.status !== 'Error') {
-			return response;
-		} else {
-			session.error = response.message;
-			throw response.message;
-		}
-	},
-	getByRole: async function(url) {
-		return await session.get(session.login.role+'/'+url);
-	},
-	postByRole: async function(url, body) {
-		return await session.post(session.login.role+'/'+url, body);
-	}
+	get: async (url) => await serverHandler(session.baseUrl(url), 'get'),
+	post: async (url, body) => await serverHandler(session.baseUrl(url), 'post', body),
+	delete: async (url) => await serverHandler(session.baseUrl(url), 'delete'),
+	getByRole: async (url) => await serverHandler(session.baseUrlByRole(url), 'get'),
+	postByRole: async (url, body) => await serverHandler(session.baseUrlByRole(url), 'post', body),
+	deleteByRole: async (url) => await serverHandler(session.baseUrlByRole(url), 'delete'),
 }
+
 if (window.sessionStorage.getItem('appauth')) {
 	session.auth = window.sessionStorage.getItem('appauth');
 	session.login = JSON.parse(window.sessionStorage.getItem('applogin'));
@@ -80,4 +73,5 @@ if (window.sessionStorage.getItem('appauth')) {
 	session.login = JSON.parse(window.localStorage.getItem('applogin'));
 }
 window.session = session;
+window.callbacks = [];
 export default session;

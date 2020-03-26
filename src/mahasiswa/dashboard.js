@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import Page from '../widget/page';
-import session from '../Session';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 export default function () {
 

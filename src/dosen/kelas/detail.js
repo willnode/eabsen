@@ -1,6 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { controlTable, controlButtons } from '../../widget/controls';
+import { useParams, } from 'react-router-dom';
+import { controlTable, controlButtons, controlDelete } from '../../widget/controls';
+import { LoadingPage } from '../../widget/page';
+import session from '../../Session';
+
+export function PertemuanBaru() {
+	const id = useParams().id;
+	session.postByRole('pertemuan/'+id, {}).then(x => session.history.replace('/dosen/kelas/absen/'+x.row_id));
+	return <LoadingPage />
+}
 
 export default function ({ id }) {
 	if (id === null || id === undefined) {
@@ -11,10 +19,21 @@ export default function ({ id }) {
 		{controlTable({
 			url: `pertemuan/${id}`,
 			toolbar: controlButtons([{
-				href: 'create',
-				title: 'New',
+				href: '/dosen/kelas/pertemuan_baru/'+id,
+				title: 'Pertemuan Baru',
 				icon: 'fa fa-plus',
-				style: 'btn btn-success ml-2',
+				style: 'btn btn-primary ml-2',
+			}, {
+				href: '/dosen/kelas/edit/'+id,
+				title: 'Edit Kelas',
+				icon: 'fa fa-edit',
+				style: 'btn btn-warning',
+			}, {
+				href: () => session.history.goBack(),
+				title: 'Kembali',
+				key: 'back',
+				icon: 'fa fa-chevron-left',
+				style: 'btn btn-secondary',
 			}])
 		}, [{
 			field: 'pertemuan_nth',
@@ -30,7 +49,7 @@ export default function ({ id }) {
 				style: 'btn btn-sm btn-primary',
 				icon: 'fa fa-link',
 			}, {
-				href: `delete/${value}`,
+				href: controlDelete('pertemuan/'+id, value),
 				style: 'btn btn-sm btn-danger',
 				icon: 'fa fa-trash',
 				confirm: 'Yakin?'

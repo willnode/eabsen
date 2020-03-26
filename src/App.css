@@ -189,3 +189,7 @@ body,
 input[type='file'] {
   height: auto;
 }
+
+.fixed-table-toolbar > div {
+  margin-bottom: 1em;
+}

@@ -12,6 +12,12 @@ class BootstrapTable extends Component {
 				e.preventDefault();
 				session.history.push(window.$(this).attr("href").replace(new RegExp('^'+process.env.PUBLIC_URL), ''));
 			})
+			table.find('button').on('click', function(e) {
+				e.preventDefault();
+				if (window.$(this).data('onclick')) {
+					window.callbacks[window.$(this).data('onclick')](e);
+				}
+			})
 		})
 	}
 	componentDidUpdate(nextProps) {

@@ -3,7 +3,6 @@ import React from 'react';
 import session from '../Session';
 import BsTable from '../widget/bstable';
 import { Link, Router } from 'react-router-dom';
-var path = require('path');
 
 function controlError() {
 	return ''; //TODO
@@ -42,7 +41,7 @@ function controlAttrs(attr) {
 
 function controlAttrsData(attr) {
 	let a = {};
-	Object.entries(([k, v]) => a['data-' + k] = v);
+	Object.entries(attr).forEach(([k, v]) => a['data-' + k] = v);
 	return a;
 }
 
@@ -103,7 +102,7 @@ function controlSubmit() {
  */
 function controlBack() {
 	return controlDiv({
-		class: '', value:
+		class: ' ', value:
 			<button onClick={session.history.goBack} className="btn btn-secondary form-control ">Kembali</button>
 	});
 }
@@ -121,10 +120,10 @@ function controlTextarea(attr) {
 }
 
 function controlOption(attr) {
-	const { value, options, option_key, option_value } = attr;
+	const { value, options, optionKey, optionValue } = attr;
 	delete attr.options;
-	delete attr.option_key;
-	delete attr.option_value;
+	delete attr.optionKey;
+	delete attr.optionValue;
 	delete attr.value;
 	return <div className="form-group row">
 		{controlLabel(attr)}
@@ -132,8 +131,8 @@ function controlOption(attr) {
 		<div className="col-md-9">
 			<select {...controlAttrs(attr)} defaultValue={value}>
 				{
-					options.map(v => <option key={v[option_key]} value={v[option_key]}>
-						{v[option_value]}</option>)
+					options.map(v => <option key={v[optionKey]} value={v[optionKey]}>
+						{v[optionValue]}</option>)
 				}
 			</select>
 		</div >
@@ -212,11 +211,12 @@ function controlButtons(buttons, style = 'btn-group') {
 				if (button.href) {
 					value = button.href;
 					type = button.type ? button.type : (button.href instanceof Function ? 'button' : 'link');
+					console.log(type);
 				} else {
 					value = button.value ? button.value : 'y';
 					type = button.type ? button.type : 'submit';
 				}
-				const id = name + value;
+				const id = button.key || name + value;
 
 				switch (type) {
 					case 'submit':
@@ -231,7 +231,8 @@ function controlButtons(buttons, style = 'btn-group') {
 						return <Link key={id} onClick={() => conf()} to={value} className={style}>
 							<i className={icon}></i>{title}</Link>
 					case 'button':
-						return <button key={id} onClick={() => conf() ? value() : ''} className={style}>
+						window.callbacks[id] = () => conf() ? value() : '';
+						return <button key={id} onClick={window.callbacks[id]} data-onclick={id} className={style}>
 							<i className={icon}></i>{title}</button>
 					case 'copy':
 						return <button key={id} onClick={() => {if(conf()) prompt('Copy this text (Ctrl+C):', value); return false}} className={style}>
@@ -287,6 +288,24 @@ function controlTable(data, columns) {
 		</>
 }
 
+function controlDelete(url,id) {
+	return (_) => {
+		(session.deleteByRole(url+'/'+id)
+		.then(() => session.setMessage('Berhasil dihapus'))
+		.catch((e) => session.setError(e))
+		)
+	}
+}
+
+function controlPost(url,id) {
+	return (e) => {
+		(session.postByRole(url+'/' + id, session.extract(e))
+		.then(() => id === 0 ? (session.message = 'Berhasil disimpan' && session.history.goBack()) : session.setMessage('Berhasil disimpan'))
+		.catch((e) => session.setError(e))
+		)
+	}
+}
+
 export {
 	controlError,
 	controlAttrs,
@@ -301,5 +320,7 @@ export {
 	controlFile,
 	controlImage,
 	controlButtons,
-	controlTable
+	controlTable,
+	controlPost,
+	controlDelete,
 }

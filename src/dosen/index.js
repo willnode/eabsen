@@ -2,7 +2,7 @@ import React from 'react';
 import Dashboard from './dashboard';
 import Profile from './profile';
 import KelasList from './kelas/list';
-import KelasDetail from './kelas/detail';
+import KelasDetail, {PertemuanBaru} from './kelas/detail';
 import KelasEdit from './kelas/edit';
 import KelasAbsen from './kelas/absen';
 import {
@@ -27,6 +27,9 @@ export default function () {
 				</Route>
 				<Route exact strict path="/dosen/kelas/create">
 					<KelasEdit id={0} />
+				</Route>
+				<Route exact strict path="/dosen/kelas/pertemuan_baru/:id">
+					<PertemuanBaru />
 				</Route>
 				<Route exact strict path="/dosen/kelas/absen/:id">
 					<KelasAbsen />
