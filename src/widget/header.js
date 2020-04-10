@@ -2,6 +2,9 @@ import React from 'react';
 import session from '../Session';
 import { Link, Switch, Route } from 'react-router-dom';
 
+import DosenSidebar from '../dosen/sidebar';
+import MahasiswaSidebar from '../mahasiswa/sidebar';
+
 export function ToggleSidebarCollapse() {
   const $ = window.$;
   $("body").toggleClass("sidebar-toggled");
@@ -21,7 +24,14 @@ function HeaderLogon() {
     <li>
       <div className="topbar-divider d-none d-sm-block h-100"></div>
     </li>
-
+    <Switch>
+      <Route path="/dosen">
+        <DosenSidebar />
+      </Route>
+      <Route path="/mahasiswa">
+        <MahasiswaSidebar />
+      </Route>
+    </Switch>
     <li className="nav-item dropdown no-arrow">
       <a className="nav-link dropdown-toggle" href="/#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 <span className="mr-2 d-none d-lg-inline text-gray-600 small">{session.login.nama}</span>

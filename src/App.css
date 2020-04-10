@@ -193,3 +193,7 @@ input[type='file'] {
 .fixed-table-toolbar > div {
   margin-bottom: 1em;
 }
+
+video {
+	width: 100%;
+}

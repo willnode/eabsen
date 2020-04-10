@@ -1,6 +1,6 @@
 
 
-const serverUrl = process.env.NODE_ENV === 'production' ? 'https://dev.wellosoft.net/eabsen' : 'http://localhost/eabsen-ci';
+const serverUrl = process.env.NODE_ENV === 'production' ? 'https://dev.wellosoft.net/eabsen' : 'http://'+window.location.hostname+'/eabsen-ci';
 
 const serverHandler = async (url,method,body) => {
 	let response;

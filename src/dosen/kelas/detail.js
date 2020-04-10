@@ -48,6 +48,7 @@ export default function ({ id }) {
 				href: `../absen/${value}`,
 				style: 'btn btn-sm btn-primary',
 				icon: 'fa fa-link',
+				title: 'Lihat',
 			}, {
 				href: controlDelete('pertemuan/'+id, value),
 				style: 'btn btn-sm btn-danger',

@@ -12,9 +12,9 @@ export default function ({ id }) {
 		{controlTable({
 			url: `absen/${id}`,
 			toolbar: controlButtons([{
-				href: `/dosen/pertemuan/barcode/${id}`,
+				href: `/dosen/kelas/barcode/${id}`,
 				title: 'Barcode',
-				icon: 'fa fa-plus',
+				icon: 'fa fa-barcode',
 				style: 'btn btn-primary ml-2',
 			}, {
 				href: () => session.history.goBack(),
@@ -28,9 +28,8 @@ export default function ({ id }) {
 			title: '#',
 			width: 100,
 			formatter: (value) => (
-
-				<img alt="" style={{ maxWidth: '100px', height: '100px', objectFit: 'contain' }} src={value ? session.baseUrl(`uploads/toko/${value}`) : '/assets/user.png'} />
-
+				<img alt="" style={{ maxWidth: '100px', height: '100px', objectFit: 'contain' }}
+				src={value ? session.baseUrl(`uploads/toko/${value}`) : '/assets/user.png'} />
 			)
 		}, {
 			field: 'nim',
