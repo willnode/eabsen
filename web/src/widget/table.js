@@ -68,17 +68,21 @@ function SearchBar({ search, setSearch }) {
 
 function toolbarActions(actions, endpoint) {
   endpoint = endpoint || guessEndpoint();
-  const renders = [{
-    key: 'archive',
-    icon: () => getQueryParam('archived') ? <ArchiveRIcon /> : <ArchiveIcon />,
-    tooltip: 'Toggle Archive',
-    onClick: () => history().replace(`?archived=${getQueryParam('archived') ? '' : '1'}`),
-  }, {
-    key: 'create',
-    icon: () => <AddIcon />,
-    tooltip: 'New',
-    onClick: () => history().push(`/${endpoint}/create`)
-  }].filter((x) => (actions || []).includes(x.key))
+  const renders = (actions || []).map((act) => {
+    if (typeof act === 'string') {
+      return [{
+        key: 'archive',
+        icon: () => getQueryParam('archived') ? <ArchiveRIcon /> : <ArchiveIcon />,
+        tooltip: 'Toggle Archive',
+        onClick: () => history().replace(`?archived=${getQueryParam('archived') ? '' : '1'}`),
+      }, {
+        key: 'create',
+        icon: () => <AddIcon />,
+        tooltip: 'New',
+        onClick: () => history().push(`/${endpoint}/create`)
+      }].find((x) => x.key === act);
+    } else return act;
+  }).filter(x => !!x)
 
   return renders.map(({ key, icon: Icon, tooltip, onClick }) => (
     <IconButton key={key} title={tooltip} onClick={() => onClick()}><Icon /></IconButton>

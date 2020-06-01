@@ -22,6 +22,7 @@ class KelasModel extends BaseModel
 	function executeBeforeExecute($event)
 	{
 		$this->where['kelas_dosen'] = $event['request']->login->current_id;
+		return $event;
 	}
 
 
@@ -32,7 +33,8 @@ class KelasModel extends BaseModel
 		{
 			$db = \Config\Database::connect();
 			$db->simpleQuery("CALL `".$db->prefixTable ('pertemuan__generate')."`(".
-			$db->escape($id).", ".$db->escape(rand(0, 999999999999)).")");
+			$db->escape($id[0]).", ".$db->escape(rand(111111, 999999)).")");
 		}
+		return $event;
 	}
 }

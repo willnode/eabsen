@@ -12,7 +12,7 @@ import {
 
 function submit(_, data) {
   doLogin(
-    (data.get('identity')),
+    (data.get('nip') || data.get('nim')),
     (data.get('password')),
     (data.get('rememberme'))).then(() => [setMessage('Welcome!')]);
 }
@@ -35,7 +35,7 @@ export default function () {
         Register
       </Typography>
       <Form action="register" redirect={submit}>
-        <Select value={role} onChange={x => setRole(x.target.value)}
+        <Select name="role" value={role} onChange={x => setRole(x.target.value)}
           options={{ mahasiswa: 'Mahasiswa', dosen: 'Dosen' }} />
         <Input validator={validators.nama} name="nama" label="Nama" />
         {role === 'dosen' && <Input validator={validators.identity} name="nip" label="NIP" />}
