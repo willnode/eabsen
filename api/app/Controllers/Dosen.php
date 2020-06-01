@@ -4,6 +4,7 @@ use App\Models\AbsenModel;
 use App\Models\KelasModel;
 use App\Models\PertemuanModel;
 use App\Models\ProfileModel;
+use Config\Database;
 
 class Dosen extends BaseController
 {
@@ -43,15 +44,16 @@ class Dosen extends BaseController
 
 	public function barcode($id=NULL)
 	{
-		$this->db->join('kelas', 'pertemuan.pertemuan_kelas = kelas.kelas_id');
-		$row = get_values_at('pertemuan', $id, 'load_404', 'pertemuan_id');
+		$row = Database::connect()->table('pertemuan')
+		->join('kelas', 'pertemuan.pertemuan_kelas = kelas.kelas_id')
+		->where('pertemuan_id', $id)->get()->getRow();
 		$nama = $row->kelas_matakuliah;
 		$barcode = $row->pertemuan_token;
-		$generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-		echo '<html><body style="display:flex;flex-direction:column;text-align:center">';
-		echo '<div style="margin:auto"><p>'.$nama.'</p>';
-		echo $generator->getBarcode($barcode, $generator::TYPE_CODE_128, 2, 100);
-		echo '<p>'.$barcode.'</p></div></body></html>';
-		exit;
+		$generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+		return view('barcode', [
+			'nama' => $nama,
+			'barcode' => $generator->getBarcode($barcode, $generator::TYPE_CODE_128, 2, 100),
+			'serial' => $barcode
+		]);
 	}
 }

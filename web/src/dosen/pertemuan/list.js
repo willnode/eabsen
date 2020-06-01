@@ -11,7 +11,7 @@ export function PertemuanBaru() {
 			'action': 'pertemuan_baru'
 		}).then(x => history().goBack());
 	});
-	return <Page/>;
+	return <Page className="paper" />;
 }
 
 export default function () {
@@ -24,7 +24,7 @@ export default function () {
 		columns={{
 			pertemuan_nth: '#',
 			pertemuan_tanggal: 'Tanggal',
-			kelas_id: actionColumns(['detail',  'delete'], 'Pertemuan'),
+			pertemuan_id: actionColumns(['detail',  'delete'], 'Pertemuan'),
 		}} />
 }
 

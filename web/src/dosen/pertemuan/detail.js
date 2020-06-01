@@ -1,44 +1,35 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { controlTable, controlButtons } from '../../widget/controls';
-import { history } from '../../main/Helper';
-import { uploadsUrl } from '../../main/Config';
+import React, { useEffect } from 'react';
+import { RemoteTable, actionColumns } from '../../widget/table';
+import { useParams, Link } from 'react-router-dom';
+import { Page } from '../../widget/page';
+import { serverUrl } from '../../main/Config';
+import { Context } from '../../main/Contexts';
 
-export default function ({ id }) {
-	if (id === null || id === undefined) {
-		id = useParams().id;
-	}
-
-	return <div>
-		{controlTable({
-			url: `absen/${id}`,
-			toolbar: controlButtons([{
-				href: `/dosen/kelas/barcode/${id}`,
-				title: 'Barcode',
-				icon: 'fa fa-barcode',
-				style: 'btn btn-primary ml-2',
-			}, {
-				href: () => history().goBack(),
-				title: 'Kembali',
-				key: 'back',
-				icon: 'fa fa-chevron-left',
-				style: 'btn btn-secondary',
-			}])
-		}, [{
-			field: 'avatar',
-			title: '#',
-			width: 100,
-			formatter: (value) => (
-				<img alt="" style={{ maxWidth: '100px', height: '100px', objectFit: 'contain' }}
-				src={value ? uploadsUrl + (`/toko/${value}`) : '/assets/user.png'} />
-			)
-		}, {
-			field: 'nim',
-			title: 'NIM',
-		}, {
-			field: 'absen_waktu',
-			title: 'Waktu',
-		}])
-		}
-	</div>
+export default function () {
+  const id = useParams().id || 0;
+  const [URI, setURI] = React.useState();
+  useEffect(() => {
+    fetch(serverUrl + '/dosen/barcode/' + id, {
+      headers: {
+        'Authorization': Context.get('auth'),
+        'X-Requested-With': 'xmlhttprequest',
+      }
+    }).then(r => r.blob().then(b => setURI(URL.createObjectURL(b))))
+  }, []);
+	return <>
+		<Page className="paper">
+				{URI && <iframe title="Barcode" style={{ width: '100%', height: '260px', border: 0 }}
+				src={URI} />}
+		</Page>
+		<RemoteTable
+			src={`dosen/absen/?absen_pertemuan=` + id}
+			options={{
+				title: "Absen",
+				actions: ['back'],
+				searchable: false,
+			}}
+			columns={{
+				nim: 'NIM',
+				absen_waktu: 'Waktu',
+			}} /></>
 }
