@@ -1,0 +1,22 @@
+{
+  "short_name": "CRM Toolkit",
+  "name": "CRM Toolkit",
+  "description": "CRM Toolkit is your starting template for bootstrapping any web application project",
+  "icons": [
+    {
+    "src": "media/logo-192.png",
+    "type": "image/png",
+    "sizes": "192x192"
+    },
+    {
+    "src": "media/logo-512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+    }
+  ],
+  "start_url": "./",
+  "background_color": "#3f51b5",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3f51b5"
+}

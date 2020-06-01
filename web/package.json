@@ -1,0 +1,55 @@
+{
+  "name": "crmtoolkit",
+  "version": "0.5.0",
+  "description": "A project bootstrapped with CRM Toolkit",
+  "repository": "https://github.com/willnode/crm-toolkit/",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.9.6",
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.47",
+    "bootstrap": "^4.5.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "react-router-dom": "^5.1.2",
+    "react-table": "^7.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "react-snap": "^1.23.0",
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "start": "parcel src/index.html -p 3000 --open",
+    "prebuild": "rimraf dist",
+    "build": "parcel build src/index.html --no-source-maps",
+    "postbuild": "node postbuild"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
+  },
+  "reactSnap": {
+    "source": "dist"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
