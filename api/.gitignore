@@ -81,12 +81,6 @@ tests/coverage*
 phpunit
 
 #-------------------------
-# Composer
-#-------------------------
-vendor/
-composer.lock
-
-#-------------------------
 # IDE / Development Files
 #-------------------------
 
