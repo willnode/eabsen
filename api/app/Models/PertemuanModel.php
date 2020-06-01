@@ -6,6 +6,7 @@ class PertemuanModel extends BaseModel
 	protected $primaryKey = 'pertemuan_id';
 	protected $select = [
 		'pertemuan_id', 'pertemuan_nth',
+		'pertemuan_tanggal',
 		'pertemuan_kelas', 'pertemuan_token',
 	];
 	protected $indexable = [

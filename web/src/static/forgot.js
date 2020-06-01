@@ -11,6 +11,7 @@ import {
   checkAllValidators, matchesField
 } from '../widget/validators';
 import { Context } from '../main/Contexts';
+import Box from '@material-ui/core/Box';
 
 function InnerForm({ onOk }) {
   const actionRef = useRef();

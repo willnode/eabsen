@@ -1,10 +1,12 @@
 import React, { Component, createRef } from 'react';
-import { controlInput, controlSubmit } from '../widget/controls';
-import { extractForm, serverPost, history, setError } from '../main/Helper';
+import {  Form, Input, Submit } from '../widget/controls';
+import { history } from '../main/Helper';
+import { Page } from '../widget/page';
 
 
 export default class Scanner extends Component {
 	constructor() {
+		super();
 		this.Quagga = null;
 		this.ref = createRef();
 	}
@@ -33,33 +35,28 @@ export default class Scanner extends Component {
 		});
 	}
 	submit(e) {
-		const data = extractForm(e);
-		(serverPost('mahasiswa/masuk', data)
-			.then((e) => {
-				alert(e.message);
-				window.Quagga.stop();
-				history().push('/mahasiswa');
-			})
-			.catch((e) => setError(e))
-		)
+		alert(e.message);
+		window.Quagga.stop();
+		history().push('/mahasiswa');
 	}
 	componentWillUnmount() {
-		this.Quagga.stop();
+		this.Quagga && this.Quagga.stop();
 	}
 	shouldComponentUpdate() {
 		return false; // Handle by DOM
 	}
 	render() {
-		return <div className="d-flex flex-column justify-content-center">
+		return <Page className="paper">
 			<div ref={this.ref} style={{
 				width: '100%',
 				height: '64vw',
-				maxHeight: '470px' }}>
+				maxHeight: '470px'
+			}}>
 			</div>
-			<form id="kkkk" onSubmit={this.submit}>
-				{controlInput({ name: 'kode', label: 'Kode' })}
-				{controlSubmit()}
-			</form>
-		</div >
+			<Form id="kkkk" action="mahasiswa/masuk" redirect={this.submit}>
+				<Input name="kode" label="Kode" />
+				<Submit />
+			</Form>
+		</Page >
 	}
 }
