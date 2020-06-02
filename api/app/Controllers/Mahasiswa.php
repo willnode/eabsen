@@ -28,7 +28,9 @@ class Mahasiswa extends BaseController
 	{
 		if (isset($_POST['kode'])) {
 			$db = Database::connect();
-			$kelas = get_values_at('pertemuan', ['pertemuan_token' => $_POST['kode']]);
+			$kelas = Database::connect()->table('pertemuan')
+			->join('kelas', 'pertemuan.pertemuan_kelas = kelas.kelas_id')
+			->where('pertemuan_token', $_POST['kode'])->get()->getRow();
 			if ($kelas) {
 				$db->table('absen')->replace([
 					'absen_mahasiswa' => $this->login->current_id,

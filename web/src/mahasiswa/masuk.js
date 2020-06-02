@@ -35,7 +35,7 @@ export default class Scanner extends Component {
 		});
 	}
 	submit(e) {
-		alert(e.message);
+		alert(`Terimakasih. Anda sudah absen di kelas ${e.pertemuan.kelas_matakuliah} ke ${e.pertemuan.pertemuan_nth}`);
 		window.Quagga.stop();
 		history().push('/mahasiswa');
 	}

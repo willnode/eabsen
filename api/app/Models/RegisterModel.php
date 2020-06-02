@@ -8,8 +8,7 @@ class RegisterModel extends BaseModel
 		'nama', 'password', 'role', 'nim', 'nip'
 	];
 	protected $validationRules = [
-		'name' => 'required|min_length[3]|alpha_numeric_space',
-		'email' => 'required|valid_email',
+		'nama' => 'required|min_length[3]|alpha_numeric_space',
 		'password' => 'required|min_length[8]',
 		'role' => 'required|in_list[dosen,mahasiswa]',
 	];

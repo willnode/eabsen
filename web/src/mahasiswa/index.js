@@ -18,7 +18,7 @@ function Main() {
       <SEO title="Panel Mahasiswa" />
       <Switch>
         <Route exact path="/mahasiswa/" component={Dashboard} />
-        <Route path="/mahasiswa/profil/" component={Profile} />
+        <Route path="/mahasiswa/profile/" component={Profile} />
         <Route path="/mahasiswa/masuk/" component={Masuk} />
         <Route component={Page404} />
       </Switch>
