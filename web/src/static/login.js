@@ -20,18 +20,18 @@ export default function Login() {
 
   return (
     <Page className="paper center" maxWidth="xs">
-      <SEO title="Login to CRM Toolkit" />
+      <SEO title="Masuk" />
       <Avatar className="avatar">
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Masuk
       </Typography>
       <Form onSubmit={form_login}>
-        <Input name="username" required label="Username" />
-        <Input name="password" required label="Password" autoComplete="current-password" type="password" />
-        <Checkbox name="rememberme" label="Remember me" />
-        <Submit label="Sign In" />
+      <Input name="username" required label="NIP / NIM" />
+        <Input name="password" required label="Kata Sandi" autoComplete="current-password" type="password" />
+        <Checkbox name="rememberme" label="Ingat Saya" />
+        <Submit label="Masuk" />
       </Form>
     </Page>
   );

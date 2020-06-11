@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +12,9 @@ import {
   checkAllValidators, matchesField
 } from '../widget/validators';
 import { Context } from '../main/Contexts';
-import Box from '@material-ui/core/Box';
 
-function InnerForm({ onOk }) {
+
+export function InnerForm({ callback }) {
   const actionRef = useRef();
   const [stage, setStage] = useState(0);
   const [email, setEmail] = useState('');
@@ -27,7 +28,11 @@ function InnerForm({ onOk }) {
   }
   return <Form action="forgot" redirect={() => {
     if (stage === 3) {
-      doLogin(email, password, false).then((login) => [setMessage('Your new password has been saved. Welcome back!')]);
+      doLogin(email, password, false).then((login) =>
+        callback ? callback() : [
+          history().push('/' + login.role),
+          setMessage('Password baru anda sudah disimpan. Selamat Datang Kembali!')
+        ]);
     } else {
       setStage(stage + 1);
     }
@@ -37,22 +42,22 @@ function InnerForm({ onOk }) {
       label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <Box display={stage > 0 ? 'block' : 'none'}>
       <Input validator={validators.otp} name="otp" inputProps={{ readOnly: stage === 3 }}
-        label="Token (6 digit)" value={otp} onChange={(e) => setOTP(e.target.value)} />
+        label="PIN (6 digit)" value={otp} onChange={(e) => setOTP(e.target.value)} />
     </Box>
     <Box display={stage === 3 ? 'block' : 'none'}>
       <Input validator={validators.password} name="password"
-        label="New Password" value={password} onChange={(e) => setPassword(e.target.value)}
+        label="Password Baru" value={password} onChange={(e) => setPassword(e.target.value)}
         type="password" autoComplete="new-password" />
       <Input validator={validators.passconf} name="passconf"
-        label="Re-enter New Password" type="password" autoComplete="new-password" />
+        label="Ulangi Password Password" type="password" autoComplete="new-password" />
     </Box>
     <Submit disabled={!checkAllValidators(validators)} onClick={() => [
       actionRef.current.value = stage > 0 ? 'response' : '',
       stage === 1 && setStage(stage + 1),
       Context.set('auth', 'Basic ' + btoa(email + ":-")),
-    ]} />
+    ]} label={stage === 3 ? "Simpan" : "Cek"} />
     {stage === 1 && <Submit variant='outlined' onClick={() => [actionRef.current.value = 'request',
-    Context.set('auth', 'Basic ' + btoa(email + ":-"))]} label="Not Receiving Token? Send Again" />}
+    Context.set('auth', 'Basic ' + btoa(email + ":-"))]} label="Tidak menerima PIN? Coba Lagi" />}
     {stage > 0 && <Button onClick={() => setStage(stage - 1)}>Go Back</Button>}
   </Form>
 }
@@ -60,12 +65,12 @@ function InnerForm({ onOk }) {
 export default function Forgot() {
   return (
     <Page className="paper center" maxWidth="xs">
-      <SEO title="Recover your Password" />
+      <SEO title="Pulihkan Password" />
       <Avatar className="avatar">
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Recover your Password
+        Pulihkan Password
       </Typography>
       <InnerForm />
     </Page>

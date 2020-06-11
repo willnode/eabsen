@@ -45,9 +45,9 @@ function LeftBar() {
     <DrawerComponent>
       <List>
         <DrawerListItem to="/" icon={DashboardIcon} label="Home" />
-        <DrawerListItem to="/login/" icon={VpnKeyIcon} label="Login" />
-        <DrawerListItem to="/register/" icon={CreateIcon} label="Register" />
-        <DrawerListItem to="/forgot/" icon={HistoryIcon} label="Recover" />
+        <DrawerListItem to="/login/" icon={VpnKeyIcon} label="Masuk" />
+        <DrawerListItem to="/register/" icon={CreateIcon} label="Daftar" />
+        <DrawerListItem to="/forgot/" icon={HistoryIcon} label="Pulihkan" />
       </List>
     </DrawerComponent>
   )
@@ -58,8 +58,8 @@ function TopBar() {
     <HeaderComponent>
       <Hidden xsDown implementation="css">
         <Button component={Link} to="/" color="inherit">Home</Button>
-        <Button component={Link} to="/login/" color="inherit">Login</Button>
-        <Button component={Link} to="/register/" color="inherit">Register</Button>
+        <Button component={Link} to="/login/" color="inherit">Masuk</Button>
+        <Button component={Link} to="/register/" color="inherit">Daftar</Button>
       </Hidden>
     </HeaderComponent>
   )

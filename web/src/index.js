@@ -19,6 +19,11 @@ function GenerateTheme(theme) {
       }
     },
     palette: {
+      primary: {
+        main: '#e6222c',
+        dark: '#94080f',
+        light: '#ff4a53'
+      },
       type: theme, // Autochoose dark mode
     },
   })

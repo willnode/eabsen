@@ -27,12 +27,12 @@ export default function () {
   }
   return (
     <Page className="paper center" maxWidth="xs" >
-      <SEO title="Register to CRM Toolkit" />
+      <SEO title="Daftar Akun" />
       <Avatar className="avatar">
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Register
+        Daftar
       </Typography>
       <Form action="register" redirect={submit}>
         <Select name="role" value={role} onChange={x => setRole(x.target.value)}
@@ -41,8 +41,8 @@ export default function () {
         {role === 'dosen' && <Input validator={validators.identity} name="nip" label="NIP" />}
         {role === 'mahasiswa' && <Input validator={validators.identity} name="nim" label="NIM" />}
         <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password" />
-        <Input validator={validators.passconf} name="passconf" label="Re-enter Password" type="password" autoComplete="new-password" />
-        <Checkbox name="rememberme" label="Remember me" />
+        <Input validator={validators.passconf} name="passconf" label="Masukkan Ulang Password" type="password" autoComplete="new-password" />
+        <Checkbox name="rememberme" label="Ingat saya" />
         <Submit disabled={!checkAllValidators(validators)} />
       </Form>
     </Page>)

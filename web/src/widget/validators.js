@@ -47,13 +47,14 @@ function useHandleControlValidator(validator, ref) {
   }, []);
 }
 
-const required = () => e => e.target.value ? '' : 'This field is required';
-const minLength = (length) => e => !e.target.value || e.target.value.length >= length ? '' : `This field must be at least ${length} characters in length`;
-const validEmail = () => e => !e.target.value || /^\S+@\S+\.\S+$/.test(e.target.value) ? '' : `This field must be a valid email`;
-const matchesRegex = (regex) => e => !e.target.value || regex.test(e.target.value) ? '' : `This field doesn't satisfy the specified format`;
-const matchesValue = (value) => e => !e.target.value || e.target.value === value ? '' : `This field doesn't match`;
-const matchesField = (name) => e => e.target.value === e.target.form[name].value ? '' : `This field doesn't match`;
-const requireField = (name) => e => !e.target.value || e.target.form[name].value ? '' : `The other field is required`;
+const required = () => e => e.target.value ? '' : 'Isian ini diperlukan';
+const minLength = (length) => e => !e.target.value || e.target.value.length >= length ? '' : `Isian ini harus mempunyai minimal ${length} karakter`;
+const validEmail = () => e => !e.target.value || /^\S+@\S+\.\S+$/.test(e.target.value) ? '' : `Isian ini harus berupa email yang sah`;
+const validTel = () => e => !e.target.value || /^08[0-9]{9,13}$/.test(e.target.value) ? '' : `Isian ini harus berupa nomor HP yang sah`;
+const matchesRegex = (regex) => e => !e.target.value || regex.test(e.target.value) ? '' : `This field isn't satisfy the specified format`;
+const matchesValue = (value) => e => !e.target.value || e.target.value === value ? '' : `Isian ini tidak cocok`;
+const matchesField = (name) => e => e.target.value === e.target.form[name].value ? '' : `Isian ini tidak cocok`;
+const requireField = (name) => e => !e.target.value ||  e.target.form[name].value ? '' : `Isian yang lain diperlukan`;
 const combine = (rules) => e => {
   for (const rule of rules) {
     if (rule) {
@@ -71,6 +72,7 @@ export {
   matchesRegex,
   required,
   minLength,
+  validTel,
   validEmail,
   matchesField,
   matchesValue,

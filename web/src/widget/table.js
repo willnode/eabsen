@@ -25,9 +25,14 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { publicUrl } from '../main/Config';
 
 function guessEndpoint() {
-  return window.location.pathname.replace(/^\/+|\/+$/g, '');
+  let pathname = window.location.pathname;
+  if (pathname.startsWith(publicUrl)) {
+    pathname = pathname.substring(publicUrl.length);
+  }
+  return pathname.replace(/^\/+|\/+$/g, '');
 }
 
 function fromUriQuery() {
