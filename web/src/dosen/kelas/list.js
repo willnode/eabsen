@@ -12,6 +12,6 @@ export default function () {
 			kelas_matakuliah: 'Matakuliah',
 			kelas_waktu: 'Waktu',
 			kelas_hari: 'Hari',
-			kelas_id: actionColumns(['detail', 'edit', 'delete'], 'Kelas'),
+			kelas_id: actionColumns(['detail', 'edit', 'delete', 'print'], 'Kelas'),
 		}} />
 }
