@@ -12,15 +12,26 @@ export default function () {
 	return (
 		<Page className="paper" src={'dosen/kelas/' + id}>
 			{({ data }) => (
-				<Form action={'dosen/kelas/' + (id || '')} redirect={history().goBack}>
-          <Input name="kelas_matakuliah" label="Matakuliah" defaultValue={data.kelas_matakuliah} />
-          <Input name="kelas_ruang" label="Ruang" defaultValue={data.kelas_ruang} />
-          <Input name="kelas_waktu" label="Waktu" defaultValue={data.kelas_waktu} type="time"/>
-          <Select name="kelas_hari" label="Hari" defaultValue={data.kelas_hari}
-            options={{1: 'Senin', 2: 'Selasa', 3: 'Rabu', 4: 'Kamis', 5: 'Jumat', 6: 'Sabtu', 7: 'Minggu', }}/>
-					<Submit />
-          <BackButton />
-				</Form>
+				<table border='1' >
+					<thead>
+						<tr>
+							<th>Nama Mahasiswa</th>
+							<th>Pertemuan ke</th>
+							<th>Jam ke</th>
+							<th>MataKuliah</th>
+							<th>Keterangan</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+							<th>#</th>
+							<th>Mata Kuliah</th>
+							<th>Ruang Kuliah</th>
+							<th>Waktu Kuliah</th>
+							<th>Hari Kuliah</th>
+						</tr>
+					</tbody>	
+				</table>
 			)}
 		</Page>)
 }
