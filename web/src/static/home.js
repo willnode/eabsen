@@ -3,7 +3,7 @@ import { Page, SEO } from '../widget/page';
 import { publicUrl, appTitle } from '../main/Config';
 
 export default function Home() {
-  return (<Page className="paper center" maxWidth="md">
+  return (<Page className="paper kuning center" maxWidth="md">
     <SEO
       title={`Welcome to ${appTitle}!`}
       image={publicUrl + '/assets/splash.png'}

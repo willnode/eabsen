@@ -1,4 +1,6 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { Page, SEO } from '../widget/page';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -26,7 +28,7 @@ export default function () {
     passconf: useValidator(required(), matchesField('password')),
   }
   return (
-    <Page className="paper center" maxWidth="xs" >
+    <Page className="paper orange center" maxWidth="xs" >
       <SEO title="Daftar Akun" />
       <Avatar className="avatar">
         <LockOutlinedIcon />
@@ -37,10 +39,24 @@ export default function () {
       <Form action="register" redirect={submit}>
         <Select name="role" value={role} onChange={x => setRole(x.target.value)}
           options={{ mahasiswa: 'Mahasiswa', dosen: 'Dosen' }} />
-        <Input validator={validators.nama} name="nama" label="Nama" />
+        <Input validator={validators.nama} name="nama" label="Nama" 
+        InputProps={{
+          startAdornment:(
+            <InputAdornment position="start">
+              <p><img src="/assets/USERNAME.png" alt=""/></p>
+            </InputAdornment>
+          ),
+        }}/>
         {role === 'dosen' && <Input validator={validators.identity} name="nip" label="NIP" />}
         {role === 'mahasiswa' && <Input validator={validators.identity} name="nim" label="NIM" />}
-        <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password" />
+        <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password" 
+        InputProps={{
+          startAdornment:(
+            <InputAdornment position="start">
+              <p><img src="/assets/PASSWORD.png" alt=""/></p>
+            </InputAdornment>
+          ),
+        }}/>
         <Input validator={validators.passconf} name="passconf" label="Masukkan Ulang Password" type="password" autoComplete="new-password" />
         <Checkbox name="rememberme" label="Ingat saya" />
         <Submit disabled={!checkAllValidators(validators)} />

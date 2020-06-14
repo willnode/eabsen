@@ -11,16 +11,29 @@ import './media/style.css';
 
 function GenerateTheme(theme) {
   return createMuiTheme({
+    typography: {
+      "fontFamiliy" : '"Century Gothic", "Helvetica", "Arial", sans-serif',
+      "fontSize": 14,
+      "fontWeightLight": 300,
+      "fontWeightReguler": 400,
+      "fontWeightMedium": 500
+    },
     overrides: {
       MuiFormLabel: {
         asterisk: {
           display: "none", // Disable asterisk on required
         }
-      }
+      },
+      MuiTextField: {
+        root: {
+          background: 'var(--paper)',
+  
+        }
+      },
     },
     palette: {
       primary: {
-        main: '#e6222c',
+        main: '#FEC50C',
         dark: '#94080f',
         light: '#ff4a53'
       },

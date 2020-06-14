@@ -9,6 +9,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	
 }
 .layout-side, .appbar-title {
 	flex-grow: 1;
@@ -18,12 +19,14 @@
 }
 .layout-content {
 	flex-grow: 1;
+
 }
 .layout-footer {
 	padding: 2em 0;
 }
 .appbar-root {
 	z-index: var(--z-index-appbar) !important;
+
 }
 .drawer-paper {
 	width: var(--drawer-width);
@@ -42,15 +45,23 @@
 	display: block !important;
 	margin: 1em 0 !important;
 }
-.paper {
+.paper.kuning {
 	padding: 2em;
 	margin: 2em 0;
+	background:center no-repeat url('BG1.png');
+}
+.paper.orange{
+	padding: 2em;
+	margin: 2em 0;
+	background:center no-repeat url('BG 2.png');
 }
 .paper.justify {
 	text-align: justify;
 }
 .paper.table {
 	padding: 0;
+	border: 2em;
+	
 }
 .paper.center, .paper.loading {
 	display: flex;
