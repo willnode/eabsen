@@ -49,11 +49,14 @@
 	padding: 2em;
 	margin: 2em 0;
 	background:center no-repeat url('BG1.png');
+	
+
 }
 .paper.orange{
 	padding: 2em;
 	margin: 2em 0;
 	background:center no-repeat url('BG 2.png');
+	
 }
 .paper.justify {
 	text-align: justify;

@@ -23,9 +23,7 @@ export default function Login() {
   return (
     <Page className="paper kuning center" maxWidth="xs">
       <SEO title="Masuk" />
-      <Avatar className="avatar">
-        <LockOutlinedIcon />
-      </Avatar>
+      <img src="/assets/logo.png" alt=""/>
       <Typography component="h1" variant="h5">
         Masuk
       </Typography>

@@ -30,9 +30,7 @@ export default function () {
   return (
     <Page className="paper orange center" maxWidth="xs" >
       <SEO title="Daftar Akun" />
-      <Avatar className="avatar">
-        <LockOutlinedIcon />
-      </Avatar>
+      <img src="/assets/logo.png" alt=""/>
       <Typography component="h1" variant="h5">
         Daftar
       </Typography>

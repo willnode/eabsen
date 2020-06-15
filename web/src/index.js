@@ -27,6 +27,7 @@ function GenerateTheme(theme) {
       MuiTextField: {
         root: {
           background: 'var(--paper)',
+          borderWidth: 'solid 10px black',
   
         }
       },
