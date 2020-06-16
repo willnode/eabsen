@@ -11,6 +11,7 @@ import {
   useValidator, required, minLength, valididentity,
   checkAllValidators, matchesRegex, matchesField
 } from '../widget/validators';
+import { publicUrl } from '../main/Config';
 
 function submit(_, data) {
   doLogin(
@@ -30,28 +31,28 @@ export default function () {
   return (
     <Page className="paper orange center" maxWidth="xs" >
       <SEO title="Daftar Akun" />
-      <img src="/assets/logo.png" alt=""/>
+      <img src={publicUrl+"/assets/logo.png"} alt=""/>
       <Typography component="h1" variant="h5">
         Daftar
       </Typography>
       <Form action="register" redirect={submit}>
         <Select name="role" value={role} onChange={x => setRole(x.target.value)}
           options={{ mahasiswa: 'Mahasiswa', dosen: 'Dosen' }} />
-        <Input validator={validators.nama} name="nama" label="Nama" 
+        <Input validator={validators.nama} name="nama" label="Nama"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src="/assets/USERNAME.png" alt=""/></p>
+              <p><img src={publicUrl+"/assets/USERNAME.png"} alt=""/></p>
             </InputAdornment>
           ),
         }}/>
         {role === 'dosen' && <Input validator={validators.identity} name="nip" label="NIP" />}
         {role === 'mahasiswa' && <Input validator={validators.identity} name="nim" label="NIM" />}
-        <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password" 
+        <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src="/assets/PASSWORD.png" alt=""/></p>
+              <p><img src={publicUrl+"/assets/PASSWORD.png"} alt=""/></p>
             </InputAdornment>
           ),
         }}/>

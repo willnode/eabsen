@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { history, extractForm, doLogin, setError } from '../main/Helper';
 import { Page, SEO } from '../widget/page';
 import { Input, Form, Submit, Checkbox } from '../widget/controls';
+import { publicUrl } from '../main/Config';
 
 
 function form_login(e) {
@@ -23,24 +24,24 @@ export default function Login() {
   return (
     <Page className="paper kuning center" maxWidth="xs">
       <SEO title="Masuk" />
-      <img src="/assets/logo.png" alt=""/>
+      <img src={publicUrl+"/assets/logo.png"} alt=""/>
       <Typography component="h1" variant="h5">
         Masuk
       </Typography>
       <Form onSubmit={form_login}>
-      <Input name="username" required label="NIP / NIM" 
+      <Input name="username" required label="NIP / NIM"
       InputProps={{
         startAdornment:(
           <InputAdornment position="start">
-            <p><img src="/assets/USERNAME.png" alt=""/></p>
+            <p><img src={publicUrl+"/assets/USERNAME.png"} alt=""/></p>
           </InputAdornment>
         ),
       }}/>
-        <Input name="password" required label="Kata Sandi" autoComplete="current-password" type="password" 
+        <Input name="password" required label="Kata Sandi" autoComplete="current-password" type="password"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src="/assets/PASSWORD.png" alt=""/></p>
+              <p><img src={publicUrl+"/assets/PASSWORD.png"} alt=""/></p>
             </InputAdornment>
           ),
         }}/>
