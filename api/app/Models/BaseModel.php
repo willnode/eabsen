@@ -798,7 +798,7 @@ class BaseModel extends Model
 							return $v;
 						}, $model->executeNested([
 							'mode' => 'down',
-							'data' => [$model->primaryKey => $event['id']],
+							'data' => [$model->compositeKey => $event['id']],
 							'method' => SELECT,
 							'depth' => $this->_look_depth - 1
 						]));
@@ -834,7 +834,7 @@ class BaseModel extends Model
 						$data = $model->executeNested([
 							'mode' => 'down',
 							'data' => [
-								$model->compositeKey ? $model->primaryKey : $key
+								$model->compositeKey ? $model->compositeKey : $key
 								=> $value[$this->primaryKey]
 							],
 							'method' => SELECT,
@@ -845,7 +845,7 @@ class BaseModel extends Model
 							// more than a single value. Cut it short.
 							$data = count($data) > 0 ? $data[0] : null;
 						}
-						$value[$this->compositeKey ?: $key] = $data;
+						$value[$key] = $data;
 					}
 				}
 			}

@@ -9,7 +9,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	
+
 }
 .layout-side, .appbar-title {
 	flex-grow: 1;
@@ -45,18 +45,16 @@
 	display: block !important;
 	margin: 1em 0 !important;
 }
-.paper.kuning {
+.paper {
 	padding: 2em;
 	margin: 2em 0;
+}
+.paper.kuning {
 	background:center no-repeat url('BG1.png');
-	
-
 }
 .paper.orange{
-	padding: 2em;
-	margin: 2em 0;
 	background:center no-repeat url('BG 2.png');
-	
+
 }
 .paper.justify {
 	text-align: justify;
@@ -64,7 +62,6 @@
 .paper.table {
 	padding: 0;
 	border: 2em;
-	
 }
 .paper.center, .paper.loading {
 	display: flex;

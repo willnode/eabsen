@@ -2,6 +2,7 @@
 
 use App\Models\AbsenModel;
 use App\Models\KelasModel;
+use App\Models\LaporanModel;
 use App\Models\PertemuanModel;
 use App\Models\ProfileModel;
 use Config\Database;
@@ -40,6 +41,12 @@ class Dosen extends BaseController
 	{
 		return (new KelasModel())->execute($id);
 	}
+	public function laporan($id = NULL)
+	{
+		return (new LaporanModel())->execute($id);
+	}
+
+
 
 
 	public function barcode($id=NULL)

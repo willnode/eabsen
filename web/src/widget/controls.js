@@ -204,7 +204,7 @@ const BackButton = ({ label, color, variant, ...props }) => (
     disabled={Context.get('fetching')}
     onClick={() => history().goBack()}
     {...props}
-  >{label || "Go Back"}</Button>
+  >{label || "Kembali"}</Button>
 )
 
 

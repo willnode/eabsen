@@ -27,10 +27,16 @@ function GenerateTheme(theme) {
       MuiTextField: {
         root: {
           background: 'var(--paper)',
-          borderWidth: 'solid 10px black',
-  
         }
       },
+      MuiSelect: {
+        root: {
+          background: 'var(--paper)',
+        },
+        outlined: {
+          background: 'var(--paper)',
+        }
+      }
     },
     palette: {
       primary: {

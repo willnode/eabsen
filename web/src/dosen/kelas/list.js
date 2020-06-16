@@ -7,11 +7,14 @@ export default function () {
 			title: "Matakuliah",
 			actions: ['back', 'create'],
 			searchable: false,
+			tableProps: {
+				size: "small",
+			}
 		}}
 		columns={{
 			kelas_matakuliah: 'Matakuliah',
 			kelas_waktu: 'Waktu',
 			kelas_hari: 'Hari',
-			kelas_id: actionColumns(['detail', 'edit', 'delete', 'print'], 'Kelas'),
+			kelas_id: actionColumns(['detail', 'edit'], 'Kelas'),
 		}} />
 }

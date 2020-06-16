@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { serverPost, history, getQueryParam } from '../../main/Helper';
 import { Page } from '../../widget/page';
 import AddIcon from '@material-ui/icons/Add';
+import PrintIcon from '@material-ui/icons/Print';
 
 export function PertemuanBaru() {
 	const id = useParams().id;
@@ -22,10 +23,18 @@ export default function () {
 			actions: ['back', {
 				key: 'create',
 				icon: () => <AddIcon />,
-				tooltip: 'New',
+				tooltip: 'Baru',
 				onClick: () => history().push(`/dosen/pertemuan/create/`+getQueryParam('pertemuan_kelas'))
+			  }, {
+				key: 'print',
+				icon: () => <PrintIcon />,
+				tooltip: 'Cetak',
+				onClick: () => history().push(`/dosen/kelas/print/`+getQueryParam('pertemuan_kelas'))
 			  }],
 			searchable: false,
+			tableProps: {
+				size: "small",
+			}
 		}}
 		columns={{
 			pertemuan_nth: '#',
