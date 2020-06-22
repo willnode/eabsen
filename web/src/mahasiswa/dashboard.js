@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page } from '../widget/page';
+import { login } from '../main/Helper';
 
 export default function () {
 	return (
