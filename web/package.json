@@ -31,7 +31,7 @@
   "scripts": {
     "start": "parcel src/index.html -p 3000 --open",
     "prebuild": "rimraf dist",
-    "build": "parcel build src/index.html --public-url /eabsen --no-source-maps",
+    "build": "parcel build src/index.html --no-source-maps",
     "postbuild": "node postbuild"
   },
   "staticFiles": {
@@ -41,7 +41,7 @@
   "reactSnap": {
     "source": "dist"
   },
-  "homepage": "/eabsen",
+  "homepage": "",
   "browserslist": {
     "production": [
       ">0.2%",
