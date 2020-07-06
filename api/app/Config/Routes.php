@@ -34,6 +34,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 $routes->post('/forgot', 'Home::forgot');
 $routes->post('/register', 'Home::register');
+$routes->get('/barcode', 'Home::barcode');
 $routes->get('/uploads/(:any)/(:any)', 'Home::uploads/$1/$2');
 
 /**

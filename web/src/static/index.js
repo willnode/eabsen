@@ -47,7 +47,7 @@ function LeftBar() {
         <DrawerListItem to="/" icon={DashboardIcon} label="Home" />
         <DrawerListItem to="/login/" icon={VpnKeyIcon} label="Masuk" />
         <DrawerListItem to="/register/" icon={CreateIcon} label="Daftar" />
-        <DrawerListItem to="/forgot/" icon={HistoryIcon} label="Pulihkan" />
+        {/* <DrawerListItem to="/forgot/" icon={HistoryIcon} label="Pulihkan" /> */}
       </List>
     </DrawerComponent>
   )

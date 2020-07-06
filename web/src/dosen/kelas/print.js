@@ -4,17 +4,19 @@ import { useParams } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
+import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Check from '@material-ui/icons/Check';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { BackButton } from '../../widget/controls';
+import { Grid } from '@material-ui/core';
+
 export default function () {
   const id = useParams().id || 0;
   return (
-    <Page className="paper" src={'dosen/laporan/' + id}>
+    <Page src={'dosen/laporan/' + id}>
       {({ data }) => {
         const pertemuan = [];
         const mahasiswa = {};
@@ -37,42 +39,73 @@ export default function () {
         const rows = Object.values(mahasiswa);
         rows.sort((a, b) => a.nim - b.nim);
         return <>
-          <TableContainer>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>NIM</TableCell>
-                  <TableCell>Nama</TableCell>
-                  {
-                    pertemuan.map((x, i) => <TableCell key={i}>{new Date(x).toLocaleDateString("id-ID", {
-                      day: '2-digit',
-                      month: '2-digit',
-                    })}</TableCell>)
-                  }
-                  <TableCell>Jumlah</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {
-                  rows.map(x => <TableRow key={x.nim}>
-                    <TableCell>{x.nim}</TableCell>
-                    <TableCell>{x.nama}</TableCell>
-                    {
-                      x.absen.map((y, i) => (
-                        <TableCell key={i}>{y ? <Check /> : ''}</TableCell>
-                      ))
-                    }
-                    <TableCell>{x.absen.reduce((a, b) => a + b, 0)}</TableCell>
-                  </TableRow>)
-                }
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Box displayPrint="none">
-
-          <Button onClick={print} style={{width: '100%'}}>Cetak</Button>
-          <BackButton />
+          <Box displayPrint="none" margin="10px 0" padding="10px">
+            <Button variant="contained" onClick={print} style={{ width: '100%' }}>Cetak</Button>
+            <BackButton />
           </Box>
+          <div style={{ padding: '10px' }}>
+            <Grid container>
+              <Grid item xs={2}>
+                <img src="/assets/AKSI.png" alt="" width="90%" style={{ margin: 'auto', display: 'block' }} />
+              </Grid>
+              <Grid item xs={10} style={{ paddingLeft: '10px' }}>
+                <h3>AKADEMI KOMUNITAS SEMEN INDONESIA - GRESIK</h3>
+                <p>Kompleks Pabrik PT. Semen Indonesia (Persero) Tbk. Jl. Veteran Gresik<br />
+                Telp/Fax : 031-39988394 Email: aksi.semenindonesia@gmail.com</p>
+              </Grid>
+            </Grid>
+          </div>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell className="black-cell" rowSpan="3">No</TableCell>
+                <TableCell className="black-cell" rowSpan="3">NIM</TableCell>
+                <TableCell className="black-cell" rowSpan="3">Nama</TableCell>
+                <TableCell className="black-cell" colSpan={pertemuan.length}>Pertemuan</TableCell>
+                <TableCell className="black-cell" rowSpan="3">Jumlah</TableCell>
+              </TableRow>
+              <TableRow>
+                {
+                  pertemuan.map((x, i) => <TableCell className="black-cell" key={i}>{i + 1}</TableCell>)
+                }
+              </TableRow>
+              <TableRow>
+                {
+                  pertemuan.map((x, i) => <TableCell className="black-cell" key={i}>{new Date(x).toLocaleDateString("id-ID", {
+                    day: '2-digit',
+                    month: '2-digit',
+                  })}</TableCell>)
+                }
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                rows.map((x, i) => <TableRow key={x.nim}>
+                  <TableCell className="black-cell">{i + 1}</TableCell>
+                  <TableCell className="black-cell">{x.nim}</TableCell>
+                  <TableCell className="black-cell">{x.nama}</TableCell>
+                  {
+                    x.absen.map((y, i) => (
+                      <TableCell className="black-cell center" key={i}>{y ? <Check /> : ''}</TableCell>
+                    ))
+                  }
+                  <TableCell className="black-cell center">{x.absen.reduce((a, b) => a + b, 0)}</TableCell>
+                </TableRow>)
+              }
+              <TableRow>
+                <TableCell colSpan="3" className="black-cell" style={{textAlign: 'right'}}>Jumlah Mahasiswa</TableCell>
+                {
+                  pertemuan.map((x, i) => <TableCell className="black-cell" key={i}>{
+                    rows.reduce((a, b) => {
+                      console.log(b);
+                      return b.absen[i] + a}, 0)
+                  }</TableCell>)
+                }
+                <TableCell className="black-cell"></TableCell>
+
+              </TableRow>
+            </TableBody>
+          </Table>
         </>
       }}
     </Page>)

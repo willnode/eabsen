@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { appTitle } from '../main/Config';
 import { Context } from '../main/Contexts';
 import { getAvatarUrl, login, doLogout } from '../main/Helper';
+import { Box } from '@material-ui/core';
 
 export function LoginMenu() {
   const AvatarMenu = (props) => <Menu
@@ -59,24 +60,26 @@ export function LoginMenu() {
 
 export function HeaderComponent({ children }) {
   return (
-    <AppBar position="sticky" className="appbar-root">
-      <Toolbar>
-        <Hidden smUp implementation="css">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={() => Context.set('drawerOpen', !Context.get('drawerOpen'))}
-            className="appbar-menubutton"
-          >
-            <MenuIcon />
-          </IconButton>
-        </Hidden>
-        <Typography variant="h6" className="appbar-title">
-          {appTitle}
-        </Typography>
-        {children}
-      </Toolbar>
-    </AppBar>
+    <Box clone displayPrint="none">
+      <AppBar position="sticky" className="appbar-root">
+        <Toolbar>
+          <Hidden smUp implementation="css">
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={() => Context.set('drawerOpen', !Context.get('drawerOpen'))}
+              className="appbar-menubutton"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+          <Typography variant="h6" className="appbar-title">
+            {appTitle}
+          </Typography>
+          {children}
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
 }

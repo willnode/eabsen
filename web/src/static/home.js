@@ -6,7 +6,7 @@ export default function Home() {
   return (<Page className="paper kuning center" maxWidth="md">
     <SEO
       title={`Welcome to ${appTitle}!`}
-      image={publicUrl + '/assets/splash.png'}
+      image={publicUrl + '/assets/AKSI.png'}
       description="CRM Toolkit is your starting template for bootstrapping any web application project."
     />
     <h1>Selamat Datang di Aplikasi {appTitle}.</h1>

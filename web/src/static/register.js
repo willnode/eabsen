@@ -38,25 +38,25 @@ export default function () {
       <Form action="register" redirect={submit}>
         <Select name="role" value={role} onChange={x => setRole(x.target.value)}
           options={{ mahasiswa: 'Mahasiswa', dosen: 'Dosen' }} />
-        <Input validator={validators.nama} name="nama" label="Nama"
+        <Input variant="filled" validator={validators.nama} name="nama" label="Nama"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src={publicUrl+"/assets/USERNAME.png"} alt=""/></p>
+              <p><img src={publicUrl+"/assets/USERNAME.png"} width="16px"  alt=""/></p>
             </InputAdornment>
           ),
         }}/>
-        {role === 'dosen' && <Input validator={validators.identity} name="nip" label="NIP" />}
-        {role === 'mahasiswa' && <Input validator={validators.identity} name="nim" label="NIM" />}
-        <Input validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password"
+        {role === 'dosen' && <Input variant="filled" validator={validators.identity} name="nip" label="NIP" />}
+        {role === 'mahasiswa' && <Input variant="filled" validator={validators.identity} name="nim" label="NIM" />}
+        <Input variant="filled" validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src={publicUrl+"/assets/PASSWORD.png"} alt=""/></p>
+              <p><img src={publicUrl+"/assets/PASSWORD.png"} width="16px" alt=""/></p>
             </InputAdornment>
           ),
         }}/>
-        <Input validator={validators.passconf} name="passconf" label="Masukkan Ulang Password" type="password" autoComplete="new-password" />
+        <Input variant="filled" validator={validators.passconf} name="passconf" label="Masukkan Ulang Password" type="password" autoComplete="new-password" />
         <Checkbox name="rememberme" label="Ingat saya" />
         <Submit disabled={!checkAllValidators(validators)} />
       </Form>

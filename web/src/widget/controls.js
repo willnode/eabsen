@@ -113,6 +113,7 @@ const Submit = ({ label, color, variant, disabled, ...props }) => (
       marginTop: 8,
       marginBottom: 8,
       width: '100%',
+      ...(props.style || {})
     }}
     type="submit"
     variant={variant || "contained"}

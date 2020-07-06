@@ -1,7 +1,8 @@
 import React, { Component, createRef } from 'react';
 import {  Form, Input, Submit } from '../widget/controls';
-import { history } from '../main/Helper';
+import { history, getQueryParam } from '../main/Helper';
 import { Page } from '../widget/page';
+import { useEffect } from 'react';
 
 
 export default class Scanner extends Component {
@@ -28,8 +29,8 @@ export default class Scanner extends Component {
 			}
 			this.Quagga.onDetected(function (result) {
 				var code = result.codeResult.code;
-				window.$('#kode').val(code);
-				window.$('#kkkk')[0].submit();
+				document.getElementById('kode').value = code;
+				document.getElementById('kkkk').submit();
 			});
 			this.Quagga.start();
 		});
@@ -46,6 +47,13 @@ export default class Scanner extends Component {
 		return false; // Handle by DOM
 	}
 	render() {
+		useEffect(() => {
+			if (getQueryParam('kode')) {
+				var code = getQueryParam('kode');
+				document.getElementById('kode').value = code;
+				document.getElementById('kkkk').submit();
+			}
+		})
 		return <Page className="paper">
 			<div ref={this.ref} style={{
 				width: '100%',
@@ -54,8 +62,8 @@ export default class Scanner extends Component {
 			}}>
 			</div>
 			<Form id="kkkk" action="mahasiswa/masuk" redirect={this.submit}>
-				<Input name="kode" label="Kode" />
-				<Submit />
+				<Input inputProps={{hidden: true}} name="kode" label="Kode" required/>
+				<Submit style={{display: 'none'}}/>
 			</Form>
 		</Page >
 	}

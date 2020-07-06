@@ -92,3 +92,10 @@
 	padding: 0 1.5em;
 	align-items: center;
 }
+.black-cell {
+	border: 1px solid black !important;
+	padding: 4px;
+}
+.black-cell.center {
+	text-align: center;
+}

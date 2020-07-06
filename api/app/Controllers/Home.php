@@ -117,7 +117,17 @@ class Home extends BaseController
 		exit;
 	}
 
-
+	public function barcode()
+	{
+		$nama = $_GET['nama'] ?? '';
+		$barcode = $_GET['kode'] ?? '000000';
+		$generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+		return view('barcode', [
+			'nama' => $nama,
+			'barcode' => $generator->getBarcode($barcode, $generator::TYPE_CODE_128, 2, 100),
+			'serial' => $barcode
+		]);
+	}
 
 	//--------------------------------------------------------------------
 

@@ -29,19 +29,19 @@ export default function Login() {
         Masuk
       </Typography>
       <Form onSubmit={form_login}>
-      <Input name="username" required label="NIP / NIM"
+      <Input variant="filled" name="username" required label="NIP / NIM"
       InputProps={{
         startAdornment:(
           <InputAdornment position="start">
-            <p><img src={publicUrl+"/assets/USERNAME.png"} alt=""/></p>
+            <p><img src={publicUrl+"/assets/USERNAME.png"} width="16px" alt=""/></p>
           </InputAdornment>
         ),
       }}/>
-        <Input name="password" required label="Kata Sandi" autoComplete="current-password" type="password"
+        <Input variant="filled" name="password" required label="Kata Sandi" autoComplete="current-password" type="password"
         InputProps={{
           startAdornment:(
             <InputAdornment position="start">
-              <p><img src={publicUrl+"/assets/PASSWORD.png"} alt=""/></p>
+              <p><img src={publicUrl+"/assets/PASSWORD.png"} width="16px" alt=""/></p>
             </InputAdornment>
           ),
         }}/>

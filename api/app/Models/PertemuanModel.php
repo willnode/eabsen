@@ -12,6 +12,9 @@ class PertemuanModel extends BaseModel
 	protected $indexable = [
 		'pertemuan_kelas'
 	];
+	protected $lookUp = [
+		'pertemuan_kelas' => KelasModel::class,
+	];
 	protected $only = [
 		SELECT
 	];

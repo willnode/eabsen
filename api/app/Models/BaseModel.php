@@ -776,7 +776,7 @@ class BaseModel extends Model
 					$event['data'][$key] = (new $value())->executeNested([
 						'mode' => 'up',
 						'data' => $event['data'][$key],
-						'method' => GET,
+						'method' => SELECT,
 						'depth' => $this->_look_depth + 1
 					]);
 				}
