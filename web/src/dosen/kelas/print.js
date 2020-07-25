@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { BackButton } from '../../widget/controls';
 import { Grid } from '@material-ui/core';
+import { publicUrl } from '../../main/Config';
 
 export default function () {
   const id = useParams().id || 0;
@@ -23,21 +24,21 @@ export default function () {
         data.pertemuan.forEach((x, i) => {
           pertemuan.push(x.pertemuan_tanggal);
           x.absen.forEach(y => {
-            if (!mahasiswa[y.nim]) {
-              mahasiswa[y.nim] = {
-                nim: y.nim,
+            if (!mahasiswa[y.identity]) {
+              mahasiswa[y.identity] = {
+                identity: y.identity,
                 nama: y.nama,
                 absen: []
               };
             }
-            while (mahasiswa[y.nim].absen.length < i) {
-              mahasiswa[y.nim].absen.push(0);
+            while (mahasiswa[y.identity].absen.length < i) {
+              mahasiswa[y.identity].absen.push(0);
             }
-            mahasiswa[y.nim].absen.push(1);
+            mahasiswa[y.identity].absen.push(1);
           });
         });
         const rows = Object.values(mahasiswa);
-        rows.sort((a, b) => a.nim - b.nim);
+        rows.sort((a, b) => a.identity - b.identity);
         return <>
           <Box displayPrint="none" margin="10px 0" padding="10px">
             <Button variant="contained" onClick={print} style={{ width: '100%' }}>Cetak</Button>
@@ -46,9 +47,10 @@ export default function () {
           <div style={{ padding: '10px' }}>
             <Grid container>
               <Grid item xs={2}>
-                <img src="/assets/AKSI.png" alt="" width="90%" style={{ margin: 'auto', display: 'block' }} />
+                <img src={publicUrl+"/assets/AKSI.png"} alt="" width="90%" style={{ margin: 'auto', display: 'block' }} />
               </Grid>
               <Grid item xs={10} style={{ paddingLeft: '10px' }}>
+                <h1>Laporan {data.kelas_matakuliah}</h1>
                 <h3>AKADEMI KOMUNITAS SEMEN INDONESIA - GRESIK</h3>
                 <p>Kompleks Pabrik PT. Semen Indonesia (Persero) Tbk. Jl. Veteran Gresik<br />
                 Telp/Fax : 031-39988394 Email: aksi.semenindonesia@gmail.com</p>
@@ -61,7 +63,7 @@ export default function () {
                 <TableCell className="black-cell" rowSpan="3">No</TableCell>
                 <TableCell className="black-cell" rowSpan="3">NIM</TableCell>
                 <TableCell className="black-cell" rowSpan="3">Nama</TableCell>
-                <TableCell className="black-cell" colSpan={pertemuan.length}>Pertemuan</TableCell>
+                <TableCell className="black-cell center" colSpan={pertemuan.length}>Pertemuan</TableCell>
                 <TableCell className="black-cell" rowSpan="3">Jumlah</TableCell>
               </TableRow>
               <TableRow>
@@ -80,9 +82,9 @@ export default function () {
             </TableHead>
             <TableBody>
               {
-                rows.map((x, i) => <TableRow key={x.nim}>
+                rows.map((x, i) => <TableRow key={x.identity}>
                   <TableCell className="black-cell">{i + 1}</TableCell>
-                  <TableCell className="black-cell">{x.nim}</TableCell>
+                  <TableCell className="black-cell">{x.identity}</TableCell>
                   <TableCell className="black-cell">{x.nama}</TableCell>
                   {
                     x.absen.map((y, i) => (

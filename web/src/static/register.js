@@ -15,9 +15,9 @@ import { publicUrl } from '../main/Config';
 
 function submit(_, data) {
   doLogin(
-    (data.get('nip') || data.get('nim')),
+    (data.get('identity')),
     (data.get('password')),
-    (data.get('rememberme'))).then(() => [setMessage('Welcome!')]);
+    (data.get('rememberme'))).then(() => [setMessage('Selamat datang di E-Absen AKSI!')]);
 }
 
 export default function () {
@@ -25,6 +25,7 @@ export default function () {
   const validators = {
     nama: useValidator(required(), minLength(3), matchesRegex(/^[\w -'"]+$/)),
     identity: useValidator(required()),
+    prodi: useValidator(required()),
     password: useValidator(required(), minLength(8)),
     passconf: useValidator(required(), matchesField('password')),
   }
@@ -46,8 +47,9 @@ export default function () {
             </InputAdornment>
           ),
         }}/>
-        {role === 'dosen' && <Input variant="filled" validator={validators.identity} name="nip" label="NIP" />}
-        {role === 'mahasiswa' && <Input variant="filled" validator={validators.identity} name="nim" label="NIM" />}
+        {role === 'dosen' && <Input variant="filled" validator={validators.identity} name="identity" label="NIP" />}
+        {role === 'mahasiswa' && <Input variant="filled" validator={validators.identity} name="identity" label="NIM" />}
+        <Input variant="filled" validator={validators.prodi} name="prodi" label="Prodi / Fakultas" />
         <Input variant="filled" validator={validators.password} name="password" label="Password" type="password" autoComplete="new-password"
         InputProps={{
           startAdornment:(

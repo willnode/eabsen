@@ -5,7 +5,7 @@ class AbsenModel extends BaseModel
 	protected $table = 'absen';
 	protected $primaryKey = 'absen_id';
 	protected $select = [
-		'absen_id', 'absen_waktu', 'absen_mahasiswa', 'nama', 'nim', 'avatar'
+		'absen_id', 'absen_waktu', 'absen_mahasiswa', 'nama', 'identity', 'avatar'
 	];
 	protected $indexable = [
 		'absen_pertemuan'

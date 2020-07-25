@@ -236,7 +236,6 @@ function RemoteTable({ src, options, columns }) {
     let params = Object.fromEntries(
       Array.from(Object.entries(parameters)).filter(([k, v]) => v)
     );
-    console.log(params);
     return src + '?' + new URLSearchParams(params).toString();
   }, [src, parameters])
 

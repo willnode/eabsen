@@ -26,7 +26,7 @@ export default function () {
 			{({data}) => (
 				<div>
 					<Button component="a" variant="contained" color="primary" target="_blank" href={"https://api.whatsapp.com/send?text="+encodeURIComponent(serverUrl+'/barcode?nama='+encodeURIComponent(data.pertemuan_kelas.kelas_matakuliah)+'&kode='+data.pertemuan_token)}>Bagikan Barcode Link</Button>
-					<Button component="a" variant="contained" color="primary" target="_blank" href={"https://api.whatsapp.com/send?text="+encodeURIComponent('https://eabsen-aksi.dom.my.id/mahasiswa/masuk?kode='+data.pertemuan_token)}>Bagikan Join Link</Button>
+					<Button component="a" variant="contained" color="primary" target="_blank" href={"https://api.whatsapp.com/send?text="+encodeURIComponent('https://dev.wellosoft.net/eabsen/mahasiswa/masuk?kode='+data.pertemuan_token)}>Bagikan Join Link</Button>
 				</div>
 			)}
 		</Page>
@@ -38,7 +38,7 @@ export default function () {
 				searchable: false,
 			}}
 			columns={{
-				nim: 'NIM',
+				identity: 'NIM',
 				absen_waktu: 'Waktu',
 			}} /></>
 }

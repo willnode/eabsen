@@ -14,7 +14,7 @@ export default function () {
     <Page className="paper" maxWidth="sm" src={'dosen/kelas/' + id}>
       {({ data }) => (
         <Form action={'dosen/kelas/' + (id || '')} redirect={history().goBack}>
-          <Input name="kelas_matakuliah" label="Matakuliah" defaultValue={data.kelas_matakuliah} />
+          <Input name="kelas_matakuliah" label="Matakuliah / Program Studi" defaultValue={data.kelas_matakuliah} />
           <Input name="kelas_ruang" label="Ruang" defaultValue={data.kelas_ruang} />
           <Input name="kelas_waktu" label="Waktu" defaultValue={data.kelas_waktu} type="time" />
           <Select name="kelas_hari" label="Hari" defaultValue={data.kelas_hari}

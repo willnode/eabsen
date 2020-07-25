@@ -22,8 +22,8 @@ class Home extends BaseController
 				'/login/',
 				'/register/',
 				'/forgot/',
-				'/admin/',
-				'/user/'
+				'/mahasiswa/',
+				'/dosen/'
 			],
 		]);
 	}

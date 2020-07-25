@@ -43,7 +43,7 @@ class SubSubLaporanModel extends BaseModel
 		SELECT
 	];
 	protected $select = [
-		'nim', 'nama'
+		'identity', 'nama'
 	];
 
 }

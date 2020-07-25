@@ -5,7 +5,7 @@ class RegisterModel extends BaseModel
 	protected $table = 'login';
 	protected $primaryKey = 'login_id';
 	protected $allowedFields = [
-		'nama', 'password', 'role', 'nim', 'nip'
+		'nama', 'password', 'role', 'identity'
 	];
 	protected $validationRules = [
 		'nama' => 'required|min_length[3]|alpha_numeric_space',

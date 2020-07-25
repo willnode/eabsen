@@ -16,8 +16,11 @@ class Dosen extends BaseController
 		return load_info([
 			'routes'=>[
 				'/dosen/profile/',
-				'/dosen/pertemuan/',
+				'/dosen/absen/',
 				'/dosen/kelas/',
+				'/dosen/pertemuan/',
+				'/dosen/laporan/',
+				'/dosen/barcode/',
 			],
 		]);
 	}

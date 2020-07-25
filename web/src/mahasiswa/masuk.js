@@ -1,8 +1,7 @@
 import React, { Component, createRef } from 'react';
-import {  Form, Input, Submit } from '../widget/controls';
+import { Form, Input } from '../widget/controls';
 import { history, getQueryParam } from '../main/Helper';
 import { Page } from '../widget/page';
-import { useEffect } from 'react';
 
 
 export default class Scanner extends Component {
@@ -27,18 +26,19 @@ export default class Scanner extends Component {
 				console.log(err);
 				return;
 			}
-			this.Quagga.onDetected(function (result) {
+			this.Quagga.onDetected( (result) => {
+				this.Quagga.stop();
 				var code = result.codeResult.code;
 				document.getElementById('kode').value = code;
-				document.getElementById('kkkk').submit();
+				document.getElementById('subb').click();
 			});
 			this.Quagga.start();
 		});
 	}
 	submit(e) {
 		alert(`Terimakasih. Anda sudah absen di kelas ${e.pertemuan.kelas_matakuliah} ke ${e.pertemuan.pertemuan_nth}`);
-		window.Quagga.stop();
 		history().push('/mahasiswa');
+		window.Quagga.stop();
 	}
 	componentWillUnmount() {
 		this.Quagga && this.Quagga.stop();
@@ -47,13 +47,13 @@ export default class Scanner extends Component {
 		return false; // Handle by DOM
 	}
 	render() {
-		useEffect(() => {
-			if (getQueryParam('kode')) {
+		if (getQueryParam('kode')) {
+			window.setTimeout(function () {
 				var code = getQueryParam('kode');
 				document.getElementById('kode').value = code;
-				document.getElementById('kkkk').submit();
-			}
-		})
+				document.getElementById('subb').click();
+			}, 100)
+		}
 		return <Page className="paper">
 			<div ref={this.ref} style={{
 				width: '100%',
@@ -62,8 +62,10 @@ export default class Scanner extends Component {
 			}}>
 			</div>
 			<Form id="kkkk" action="mahasiswa/masuk" redirect={this.submit}>
-				<Input inputProps={{hidden: true}} name="kode" label="Kode" required/>
-				<Submit style={{display: 'none'}}/>
+				<div style={{ display: 'none' }}>
+					<Input inputProps={{ id: "kode", type: "hidden" }} name="kode" label="Kode" required />
+					<Input inputProps={{ id: "subb", type: "submit" }} />
+				</div>
 			</Form>
 		</Page >
 	}
